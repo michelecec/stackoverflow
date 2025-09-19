@@ -7,7 +7,7 @@ def is_merge_needed(controller, node, _):
     pipeline_nodes = controller.get_pipeline_dag()
     parent_node = pipeline_nodes[node.parents[0]]
     parent_task = parent_node.job.task
-    if len(config["FILEREPO"][parent_task.args.data_name.upper()]) > 1:
+    if len(config["FILE_REPO"][parent_task.get_parameters()["General/data_name"].upper()]) > 1:
         return True
     return False
 
