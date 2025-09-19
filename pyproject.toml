@@ -1,0 +1,25 @@
+[project]
+name = "stackoverflow"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Michele Cecotti",email = "michele.cecotti@ec.europa.eu"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "clearml[s3] (>=2.0.2,<3.0.0)",
+    "pandas (>=2.3.2,<3.0.0)",
+    "ipykernel (>=6.30.1,<7.0.0)",
+    "pyyaml (>=6.0.2,<7.0.0)",
+    "polars (>=1.33.1,<2.0.0)",
+    "beautifulsoup4 (>=4.13.5,<5.0.0)",
+]
+
+[tool.poetry]
+packages = [{include = "stackoverflow", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

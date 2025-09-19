@@ -1,0 +1,18 @@
+CLEARML:
+  PROJECT: "Stackoverflow"
+  TASK_ACQUISITION: "Files acquisition"
+  TASK_MERGE: "Files merging"
+  PIPELINE_PREPROCESS:
+    NAME: "Preprocessing pipeline"
+
+FILE_REPO:
+  ANSWERS: ["13ozwix5ZJ6XzqAWDTZ6qHHqrDAH6RHtW", "12ImbkAvOvlxKXcPgEOMnSoqsYAnJGKEr"]
+  QUESTIONS: ["1-RRUt5v2CskovT_GkPDa0U9lHjecvrIw","1FVMu4my90PKesOhH-o_gnHDB_P93dO7m"]
+  TAGS: ["1C75CrYksuiS61tSnThqb5tM1fVENpBXv", "1TnTUVDJ0XbZ70xTBwoJjte5T-M3oH9Wo"]
+
+GIT:
+  GITLAB_URL:
+  GITLAB_BRANCH:
+
+GENERAL:
+  MAX_ROW_SIZE: 100000
