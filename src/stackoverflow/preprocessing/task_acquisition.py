@@ -111,8 +111,8 @@ if __name__ == "__main__":
     with open('params.yaml', 'r') as file:
         config = yaml.safe_load(file)
 
-    task = Task.init(project_name=config["CLEARML"]["PROJECT"],
-                    task_name=config["CLEARML"]["TASK_ACQUISITION"],
+    task = Task.init(project_name=config["CLEARML"]["PREPROCESS"]["PROJECT_NAME"],
+                    task_name=config["CLEARML"]["PREPROCESS"]["TASK_ACQUISITION"],
                     task_type=TaskTypes.data_processing)
 
     args = {
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     n = 1
 
     for file in file_list:
-        dg = DatasetGatherer(config["CLEARML"]["PROJECT"], data_name, n)
+        dg = DatasetGatherer(config["CLEARML"]["PREPROCESS"]["PROJECT_NAME"], data_name, n)
         if not dg.check_if_exist():
             dg.download_file(file_list[n-1])
             dg.unzip_file()

@@ -17,8 +17,8 @@ if __name__ == "__main__":
     with open('params.yaml', 'r') as file:
         config = yaml.safe_load(file)
 
-    task = Task.init(project_name=config["CLEARML"]["PROJECT"],
-                    task_name=config["CLEARML"]["TASK_MERGE"],
+    task = Task.init(project_name=config["CLEARML"]["PREPROCESS"]["PROJECT_NAME"],
+                    task_name=config["CLEARML"]["PREPROCESS"]["TASK_MERGE"],
                     task_type=TaskTypes.data_processing)
 
     args = {
@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
     print("upload new dataset")
     ds_new = Dataset.create(dataset_name=get_parsed_dataset_name(data_name), 
-                            dataset_project=config["CLEARML"]["PROJECT"],
+                            dataset_project=config["CLEARML"]["PREPROCESS"]["PROJECT_NAME"],
                             parent_datasets=[ds.id],
                             description=f"Parsed version of {get_dataset_name(data_name, len(file_list))} dataset")
     ds_new.sync_folder(ds_dir)

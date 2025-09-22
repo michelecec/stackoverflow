@@ -19,16 +19,16 @@ if __name__ == "__main__":
         config = yaml.safe_load(f)
 
     clearml_config = config["CLEARML"]
-    pipe_config = clearml_config["PIPELINE_PREPROCESS"]
-    #git_config = clearml_config["GIT"]
+    prep_config = clearml_config["PREPROCESS"]
+    git_config = clearml_config["GIT"]
 
     # create the pipeline
     pipe = PipelineController(
-        name=pipe_config["NAME"],
-        project=clearml_config["PROJECT"],
+        name=prep_config["PIPELINE_NAME"],
+        project=prep_config["PROJECT_NAME"],
         add_pipeline_tags=False,
-        #repo=git_config["GITLAB_URL"],
-        #repo_branch=git_config["GITLAB_BRANCH"],
+        repo=git_config["GITLAB_URL"],
+        repo_branch=git_config["GITLAB_BRANCH"],
     )
 
     pipe.set_default_execution_queue("default")
@@ -37,8 +37,8 @@ if __name__ == "__main__":
 
     pipe.add_step(
         name="Answers_acquisition",
-        base_task_project=clearml_config["PROJECT"],
-        base_task_name=clearml_config["TASK_ACQUISITION"],
+        base_task_project=prep_config["PROJECT_NAME"],
+        base_task_name=prep_config["TASK_ACQUISITION"],
         cache_executed_step=True,
         parameter_override={
             "General/data_name": "answers",
@@ -47,8 +47,8 @@ if __name__ == "__main__":
 
     pipe.add_step(
         name="Questions_acquisition",
-        base_task_project=clearml_config["PROJECT"],
-        base_task_name=clearml_config["TASK_ACQUISITION"],
+        base_task_project=prep_config["PROJECT_NAME"],
+        base_task_name=prep_config["TASK_ACQUISITION"],
         cache_executed_step=True,
         parameter_override={
             "General/data_name": "questions",
@@ -57,8 +57,8 @@ if __name__ == "__main__":
 
     pipe.add_step(
         name="Tags_acquisition",
-        base_task_project=clearml_config["PROJECT"],
-        base_task_name=clearml_config["TASK_ACQUISITION"],
+        base_task_project=prep_config["PROJECT_NAME"],
+        base_task_name=prep_config["TASK_ACQUISITION"],
         cache_executed_step=True,
         parameter_override={
             "General/data_name": "tags",
@@ -69,8 +69,8 @@ if __name__ == "__main__":
 
     pipe.add_step(
         name="Answers_merge",
-        base_task_project=clearml_config["PROJECT"],
-        base_task_name=clearml_config["TASK_MERGE"],
+        base_task_project=prep_config["PROJECT_NAME"],
+        base_task_name=prep_config["TASK_MERGE"],
         parents=["Answers_acquisition"],
         cache_executed_step=True,
         parameter_override={
@@ -81,8 +81,8 @@ if __name__ == "__main__":
 
     pipe.add_step(
         name="Questions_merge",
-        base_task_project=clearml_config["PROJECT"],
-        base_task_name=clearml_config["TASK_MERGE"],
+        base_task_project=prep_config["PROJECT_NAME"],
+        base_task_name=prep_config["TASK_MERGE"],
         parents=["Questions_acquisition"],
         cache_executed_step=True,
         parameter_override={
@@ -93,8 +93,8 @@ if __name__ == "__main__":
 
     pipe.add_step(
         name="Tags_merge",
-        base_task_project=clearml_config["PROJECT"],
-        base_task_name=clearml_config["TASK_MERGE"],
+        base_task_project=prep_config["PROJECT_NAME"],
+        base_task_name=prep_config["TASK_MERGE"],
         parents=["Tags_acquisition"],
         cache_executed_step=True,
         parameter_override={
