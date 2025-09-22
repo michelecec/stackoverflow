@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     clearml_config = config["CLEARML"]
     prep_config = clearml_config["PREPROCESS"]
-    git_config = clearml_config["GIT"]
+    git_config = config["GIT"]
 
     # create the pipeline
     pipe = PipelineController(

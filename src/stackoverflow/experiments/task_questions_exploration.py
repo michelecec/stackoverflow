@@ -12,7 +12,7 @@ if __name__ == "__main__":
                     task_name=config["CLEARML"]["EXPERIMENTS"]["TASK_QUEST_EXPLORATION"],
                     task_type=TaskTypes.data_processing)
     
-    #task.execute_remotely()
+    task.execute_remotely()
 
     print("Gather datasets")
     ds_quest = Dataset.get(dataset_name=config["DATASETS"]["QUEST_NAME"],
