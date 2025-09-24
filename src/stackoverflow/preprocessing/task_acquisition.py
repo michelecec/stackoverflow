@@ -18,8 +18,7 @@ class DatasetGatherer():
         self.tempdir = os.path.join(tempfile.gettempdir(),"stackoverflow", str(uuid.uuid1()))
         os.makedirs(self.tempdir, exist_ok=True)
 
-    def __del__(self):
-        import shutil
+    def delete_temp(self):
         shutil.rmtree(self.tempdir)
 
     def gettempfile(self, ext: str)->str:
@@ -75,7 +74,7 @@ class DatasetGatherer():
             self._download_file_from_google_drive(file_url,self.gettempfile("zip"))
 
     def unzip_file(self):
-        print("unzip the file")
+        print(f"unzip the file {self.gettempfile("zip")}")
         with zipfile.ZipFile(self.gettempfile("zip"), 'r') as zip_ref:
             zip_ref.extractall(self.tempdir)
 
@@ -133,7 +132,9 @@ if __name__ == "__main__":
             dg.unzip_file()
             dg.csv_to_parquet()
             dg.create_dataset()
+        dg.delete_temp()
         n = n+1
+
 
         print("Dataset acquired")
 

@@ -70,11 +70,13 @@ if __name__ == "__main__":
 
     bar_colors = ['tab:red', 'tab:blue', 'tab:red', 'tab:orange']
 
+    plt.figure(figsize=(12, 7))  # width:20, height:3
     plt.bar(tot_tags["tag"], tot_tags["num_quest"], color=bar_colors)
 
     # Adding labels and title
     plt.xlabel('Tags used')
     plt.ylabel('Number of questions')
+    plt.xticks(range(len(tot_tags)), tot_tags["tag"], rotation=45)
     plt.title('Most used tags')
     plt.show()
     
